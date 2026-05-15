@@ -1,0 +1,54 @@
+{
+  "existing": {
+    "animal": {
+      "ANIMAL00": {
+        "binomial_name": "s5a",
+        "common_name": "s5b",
+        "data": [],
+        "image_src": "s5d",
+        "last_record": "s5e",
+        "location": "s5f",
+        "short_desc": "s60",
+        "status": "s61",
+        "wiki_link": "s62"
+      },
+      "ANIMAL01": {
+        "binomial_name": "sb4",
+        "common_name": "sb5",
+        "data": [],
+        "image_src": "sb7",
+        "last_record": "sb8",
+        "location": "sb9",
+        "short_desc": "sba",
+        "status": "sbb",
+        "wiki_link": "sbc"
+      },
+      "ANIMAL02": {
+        "binomial_name": "s10e",
+        "common_name": "s10f",
+        "data": [],
+        "image_src": "s111",
+        "last_record": "s112",
+        "location": "s113",
+        "short_desc": "s114",
+        "status": "s115",
+        "wiki_link": "s116"
+      }
+    }
+  },
+  "new": {
+    "animal": {
+      "animal_ref01": {
+        "binomial_name": "s168",
+        "common_name": "s169",
+        "data": [],
+        "image_src": "s16b",
+        "last_record": "s16c",
+        "location": "s16d",
+        "short_desc": "s16e",
+        "status": "s16f",
+        "wiki_link": "s170"
+      }
+    }
+  }
+}

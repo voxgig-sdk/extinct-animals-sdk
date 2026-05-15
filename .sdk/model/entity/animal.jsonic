@@ -1,0 +1,132 @@
+# Entity: animal
+
+main: kit: entity: animal: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "binomial_name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "common_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "data"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "image_src"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "last_record"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "short_desc"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "wiki_link"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "animal"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: true
+                kind: "query"
+                name: "image_required"
+                orig: "image_required"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/animal/"
+          parts: [
+            "animal"
+          ]
+          select: {
+            exist: [
+              "image_required"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "number"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/animal/{number}"
+          parts: [
+            "animal"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              number: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

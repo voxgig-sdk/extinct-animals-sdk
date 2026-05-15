@@ -1,0 +1,11 @@
+# ExtinctAnimals SDK exists test
+
+require "minitest/autorun"
+require_relative "../ExtinctAnimals_sdk"
+
+class ExistsTest < Minitest::Test
+  def test_create_test_sdk
+    testsdk = ExtinctAnimalsSDK.test(nil, nil)
+    assert !testsdk.nil?
+  end
+end

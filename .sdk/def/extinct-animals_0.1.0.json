@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Extinct Animals API",
+    "description": "This API provides information about animals that became extinct in the last 11,650 years, known as the Holocene extinction. It gathers data from Wikipedia and individual animal pages, allowing users to retrieve information about these extinct species, including their names and last recorded sightings. The API contains 804 extinct animals with data scraped from Wikipedia.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://cheba-apis.vercel.app/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://extinct-api.herokuapp.com/api/v1",
+      "description": "Production server (Note: Goes to sleep after 30 minutes of inactivity)"
+    }
+  ],
+  "paths": {
+    "/animal/": {
+      "get": {
+        "summary": "Get random extinct animal",
+        "description": "Returns one random animal from the database of 804 extinct animals.",
+        "operationId": "getRandomAnimal",
+        "parameters": [
+          {
+            "name": "imageRequired",
+            "in": "query",
+            "description": "Filter animals by image availability",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with one random extinct animal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "data": [
+                    {
+                      "binomialName": "Chaetoptila angustipluma",
+                      "commonName": "Kioea",
+                      "location": "Hawaii, Oahu, and Maui, Hawaii, United States",
+                      "wikiLink": "https://en.wikipedia.org/wiki/Kioea",
+                      "lastRecord": "1859",
+                      "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Chaetoptila_angustipluma.jpg/220px-Chaetoptila_angustipluma.jpg",
+                      "shortDesc": "The kioea (Chaetoptila angustipluma) was a endemic Hawaiian bird that became extinct around the mid-19th century."
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/{number}": {
+      "get": {
+        "summary": "Get specified number of extinct animals",
+        "description": "Returns the specified number of extinct animals. Accepts values from 1 to 804.",
+        "operationId": "getAnimalsByNumber",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "path",
+            "description": "Number of animals to retrieve (1-804)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 804
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with specified number of extinct animals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalResponse"
+                },
+                "example": {
+                  "status": "success",
+                  "data": [
+                    {
+                      "binomialName": "Chaetoptila angustipluma",
+                      "commonName": "Kioea",
+                      "location": "Hawaii, Oahu, and Maui, Hawaii, United States",
+                      "wikiLink": "https://en.wikipedia.org/wiki/Kioea",
+                      "lastRecord": "1859",
+                      "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Chaetoptila_angustipluma.jpg/220px-Chaetoptila_angustipluma.jpg",
+                      "shortDesc": "The kioea (Chaetoptila angustipluma) was a endemic Hawaiian bird that became extinct around the mid-19th century."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid number parameter"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnimalResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the API response",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of extinct animal objects",
+            "items": {
+              "$ref": "#/components/schemas/Animal"
+            }
+          }
+        },
+        "required": [
+          "status",
+          "data"
+        ]
+      },
+      "Animal": {
+        "type": "object",
+        "description": "Information about an extinct animal",
+        "properties": {
+          "binomialName": {
+            "type": "string",
+            "description": "Scientific binomial name of the animal",
+            "example": "Chaetoptila angustipluma"
+          },
+          "commonName": {
+            "type": "string",
+            "description": "Common name of the animal (30 animals may not have this field)",
+            "example": "Kioea"
+          },
+          "location": {
+            "type": "string",
+            "description": "Geographic location where the animal lived",
+            "example": "Hawaii, Oahu, and Maui, Hawaii, United States"
+          },
+          "wikiLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "Link to the Wikipedia page about the animal",
+            "example": "https://en.wikipedia.org/wiki/Kioea"
+          },
+          "lastRecord": {
+            "type": "string",
+            "description": "Year or date of the last recorded sighting",
+            "example": "1859"
+          },
+          "imageSrc": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to an image of the animal (220 animals may not have this field)",
+            "example": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Chaetoptila_angustipluma.jpg/220px-Chaetoptila_angustipluma.jpg"
+          },
+          "shortDesc": {
+            "type": "string",
+            "description": "Short description of the animal (6 animals may not have this field)",
+            "example": "The kioea (Chaetoptila angustipluma) was a endemic Hawaiian bird that became extinct around the mid-19th century."
+          }
+        },
+        "required": [
+          "binomialName"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

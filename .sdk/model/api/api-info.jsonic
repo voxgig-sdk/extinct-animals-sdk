@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://cheba-apis.vercel.app/"
+      }
+      description: "This API provides information about animals that became extinct in the last 11,650 years, known as the Holocene extinction. It gathers data from Wikipedia and individual animal pages, allowing users to retrieve information about these extinct species, including their names and last recorded sightings. The API contains 804 extinct animals with data scraped from Wikipedia."
+      servers: [
+        {
+          description: "Production server (Note: Goes to sleep after 30 minutes of inactivity)"
+          url: "https://extinct-api.herokuapp.com/api/v1"
+        }
+      ]
+      title: "Extinct Animals API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

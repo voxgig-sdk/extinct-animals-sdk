@@ -1,0 +1,44 @@
+# BasicAnimalFlow
+
+main: kit: flow: BasicAnimalFlow:
+{
+  entity: "animal",
+  kind: "basic",
+  name: "BasicAnimalFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "animal_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "animal_ref01",
+        srcdatavar: "animal_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "animal01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-animal_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAnimalFlow"
+}
