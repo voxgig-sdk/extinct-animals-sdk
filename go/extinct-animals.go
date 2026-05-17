@@ -1,10 +1,10 @@
 package voxgigextinctanimalssdk
 
 import (
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
-	"github.com/voxgig-sdk/extinct-animals-sdk/entity"
-	"github.com/voxgig-sdk/extinct-animals-sdk/feature"
-	_ "github.com/voxgig-sdk/extinct-animals-sdk/utility"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/entity"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/feature"
+	_ "github.com/voxgig-sdk/extinct-animals-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

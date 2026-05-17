@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
 )
 
 type BaseFeature struct {

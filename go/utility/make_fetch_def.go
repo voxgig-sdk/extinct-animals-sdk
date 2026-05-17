@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/extinct-animals-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
 )
 
 func makeFetchDefUtil(ctx *core.Context) (map[string]any, error) {

@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
 )
 
 type LogFeature struct {

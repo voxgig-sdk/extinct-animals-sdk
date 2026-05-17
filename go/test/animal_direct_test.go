@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/extinct-animals-sdk"
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
+	sdk "github.com/voxgig-sdk/extinct-animals-sdk/go"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
 )
 
 func TestAnimalDirect(t *testing.T) {

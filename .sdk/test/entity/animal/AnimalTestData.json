@@ -10,7 +10,8 @@
         "location": "s5f",
         "short_desc": "s60",
         "status": "s61",
-        "wiki_link": "s62"
+        "wiki_link": "s62",
+        "id": "ANIMAL00"
       },
       "ANIMAL01": {
         "binomial_name": "sb4",
@@ -21,7 +22,8 @@
         "location": "sb9",
         "short_desc": "sba",
         "status": "sbb",
-        "wiki_link": "sbc"
+        "wiki_link": "sbc",
+        "id": "ANIMAL01"
       },
       "ANIMAL02": {
         "binomial_name": "s10e",
@@ -32,7 +34,8 @@
         "location": "s113",
         "short_desc": "s114",
         "status": "s115",
-        "wiki_link": "s116"
+        "wiki_link": "s116",
+        "id": "ANIMAL02"
       }
     }
   },

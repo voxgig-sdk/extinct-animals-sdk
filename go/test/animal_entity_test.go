@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/extinct-animals-sdk"
-	"github.com/voxgig-sdk/extinct-animals-sdk/core"
+	sdk "github.com/voxgig-sdk/extinct-animals-sdk/go"
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/extinct-animals-sdk/go/utility/struct"
 )
 
 func TestAnimalEntity(t *testing.T) {
