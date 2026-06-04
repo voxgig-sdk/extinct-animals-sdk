@@ -92,7 +92,6 @@ function animal_basic_setup($extra)
         "EXTINCTANIMALS_TEST_ANIMAL_ENTID" => $idmap,
         "EXTINCTANIMALS_TEST_LIVE" => "FALSE",
         "EXTINCTANIMALS_TEST_EXPLAIN" => "FALSE",
-        "EXTINCTANIMALS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -104,7 +103,6 @@ function animal_basic_setup($extra)
     if ($env["EXTINCTANIMALS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["EXTINCTANIMALS_APIKEY"],
             ],
             $extra ?? [],
         ]);

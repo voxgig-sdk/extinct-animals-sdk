@@ -16,7 +16,17 @@
           }
         ],
         "title": "Extinct Animals API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Browse animals that went extinct during the Holocene (the last ~11,650 years), scraped from Wikipedia",
+        "homepage": "https://extinct-api.herokuapp.com/api/v1/animal",
+        "docs_url": "https://cheba-apis.vercel.app/",
+        "license_short": "No licence stated; data sourced from Wikipedia",
+        "license_md": "- The API itself ships without an explicit licence statement.\n- Animal data and descriptions are scraped from Wikipedia, so the underlying text is generally available under Wikipedia's CC BY-SA terms.\n- Image URLs point to Wikimedia Commons; consult each file page for its individual licence and attribution.\n- Attribute Wikipedia (and image authors) when redistributing.",
+        "about_md": "The Extinct Animals API is a small, open data service that catalogues roughly 804 animal species and subspecies known to have become extinct during the Holocene epoch. The dataset is scraped from Wikipedia by [cheba91](https://github.com/cheba91/extinct-api) and exposed as a tiny REST endpoint.\n\nWhat you get from the API:\n\n- A random animal record from `GET /api/v1/animal/` (optional `imageRequired` query parameter).\n- A batch of N records from `GET /api/v1/animal/:number` (where `:number` is between 1 and 804).\n- Each record carries `binomialName`, `commonName`, `location`, `wikiLink`, `lastRecord` (year), `imageSrc`, and `shortDesc`.\n\nOperational notes: the API requires no authentication, has CORS enabled, and is hosted on a Heroku dyno that may sleep after periods of inactivity, so the first request after a quiet spell can be slow. Of the 804 entries, around 220 have no image, 30 are missing a common name, and 6 have no short description; all entries have a binomial name.",
+        "entity_desc": {
+          "animal": "An extinct animal species or subspecies, with Wikipedia-derived metadata such as binomial and common names, location, last-record year, image and short description; available at `GET /api/v1/animal/` (random) and `GET /api/v1/animal/:number` (batch, 1-804)."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +34,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "animal": {

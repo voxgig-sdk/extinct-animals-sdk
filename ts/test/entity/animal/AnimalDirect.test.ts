@@ -136,14 +136,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'EXTINCTANIMALS_TEST_ANIMAL_ENTID': {},
     'EXTINCTANIMALS_TEST_LIVE': 'FALSE',
-    'EXTINCTANIMALS_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.EXTINCTANIMALS_TEST_LIVE
 
   if (live) {
     const client = new ExtinctAnimalsSDK({
-      apikey: env.EXTINCTANIMALS_APIKEY,
     })
 
     let idmap: any = env['EXTINCTANIMALS_TEST_ANIMAL_ENTID']
