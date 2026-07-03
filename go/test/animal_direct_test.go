@@ -194,12 +194,14 @@ func animalDirectSetup(mockres any) *animalDirectSetupResult {
 	env := envOverride(map[string]any{
 		"EXTINCTANIMALS_TEST_ANIMAL_ENTID": map[string]any{},
 		"EXTINCTANIMALS_TEST_LIVE":    "FALSE",
+		"EXTINCTANIMALS_APIKEY":       "NONE",
 	})
 
 	live := env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["EXTINCTANIMALS_APIKEY"],
 		}
 		client := sdk.NewExtinctAnimalsSDK(mergedOpts)
 

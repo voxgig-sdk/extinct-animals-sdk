@@ -1,6 +1,11 @@
 # ExtinctAnimals Ruby SDK
 
-The Ruby SDK for the ExtinctAnimals API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the ExtinctAnimals API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "ExtinctAnimals_sdk"
 
-client = ExtinctAnimalsSDK.new({})
+client = ExtinctAnimalsSDK.new({
+  "apikey" => ENV["EXTINCT-ANIMALS_APIKEY"],
+})
 ```
 
 ### 2. List animals
 
 ```ruby
-result, err = client.Animal(nil).list(nil, nil)
+result, err = client.Animal().list
 raise err if err
 
 if result.is_a?(Array)
@@ -51,7 +58,7 @@ end
 ### 3. Load a animal
 
 ```ruby
-result, err = client.Animal(nil).load({ "id" => "example_id" }, nil)
+result, err = client.Animal().load({ "id" => "example_id" })
 raise err if err
 puts result
 ```
@@ -97,11 +104,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = ExtinctAnimalsSDK.test(nil, nil)
+client = ExtinctAnimalsSDK.test
 
-result, err = client.ExtinctAnimals(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.ExtinctAnimals().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -133,6 +138,7 @@ Create a `.env.local` file at the project root:
 
 ```
 EXTINCT-ANIMALS_TEST_LIVE=TRUE
+EXTINCT-ANIMALS_APIKEY=<your-key>
 ```
 
 Then run:
@@ -155,6 +161,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

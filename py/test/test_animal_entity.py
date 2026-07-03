@@ -98,6 +98,7 @@ def _animal_basic_setup(extra):
         "EXTINCTANIMALS_TEST_ANIMAL_ENTID": idmap,
         "EXTINCTANIMALS_TEST_LIVE": "FALSE",
         "EXTINCTANIMALS_TEST_EXPLAIN": "FALSE",
+        "EXTINCTANIMALS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -108,6 +109,7 @@ def _animal_basic_setup(extra):
     if env.get("EXTINCTANIMALS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("EXTINCTANIMALS_APIKEY"),
             },
             extra or {},
         ])

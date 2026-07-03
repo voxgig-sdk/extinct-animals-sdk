@@ -114,6 +114,7 @@ function basicSetup(extra?: any) {
     'EXTINCT_ANIMALS_TEST_ANIMAL_ENTID': idmap,
     'EXTINCT_ANIMALS_TEST_LIVE': 'FALSE',
     'EXTINCT_ANIMALS_TEST_EXPLAIN': 'FALSE',
+    'EXTINCT_ANIMALS_APIKEY': 'NONE',
   })
 
   idmap = env['EXTINCT_ANIMALS_TEST_ANIMAL_ENTID']
@@ -123,6 +124,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new ExtinctAnimalsSDK(merge([
       {
+        apikey: env.EXTINCT_ANIMALS_APIKEY,
       },
       extra
     ]))

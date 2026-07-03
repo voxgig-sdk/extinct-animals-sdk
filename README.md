@@ -1,20 +1,8 @@
 # ExtinctAnimals SDK
 
-Browse animals that went extinct during the Holocene (the last ~11,650 years), scraped from Wikipedia
+Extinct Animals API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Extinct Animals API
-
-The Extinct Animals API is a small, open data service that catalogues roughly 804 animal species and subspecies known to have become extinct during the Holocene epoch. The dataset is scraped from Wikipedia by [cheba91](https://github.com/cheba91/extinct-api) and exposed as a tiny REST endpoint.
-
-What you get from the API:
-
-- A random animal record from `GET /api/v1/animal/` (optional `imageRequired` query parameter).
-- A batch of N records from `GET /api/v1/animal/:number` (where `:number` is between 1 and 804).
-- Each record carries `binomialName`, `commonName`, `location`, `wikiLink`, `lastRecord` (year), `imageSrc`, and `shortDesc`.
-
-Operational notes: the API requires no authentication, has CORS enabled, and is hosted on a Heroku dyno that may sleep after periods of inactivity, so the first request after a quiet spell can be slow. Of the 804 entries, around 220 have no image, 30 are missing a common name, and 6 have no short description; all entries have a binomial name.
 
 ## Try it
 
@@ -48,29 +36,31 @@ gem install extinct-animals-sdk
 luarocks install extinct-animals-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { ExtinctAnimalsSDK } from 'extinct-animals'
 
-const client = new ExtinctAnimalsSDK({})
+const client = new ExtinctAnimalsSDK({
+  apikey: process.env.EXTINCT-ANIMALS_APIKEY,
+})
 
 // List all animals
 const animals = await client.Animal().list()
+console.log(animals.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Animal** | An extinct animal species or subspecies, with Wikipedia-derived metadata such as binomial and common names, location, last-record year, image and short description; available at `GET /api/v1/animal/` (random) and `GET /api/v1/animal/:number` (batch, 1-804). | `/animal/` |
+| **Animal** |  | `/animal/` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,17 +100,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from extinctanimals_sdk import ExtinctAnimalsSDK
 
-client = ExtinctAnimalsSDK({})
+client = ExtinctAnimalsSDK({
+    "apikey": os.environ.get("EXTINCT-ANIMALS_APIKEY"),
+})
 
 # List all animals
-animals, err = client.Animal(None).list(None, None)
+animals, err = client.Animal().list()
+print(animals)
 
 # Load a specific animal
-animal, err = client.Animal(None).load(
-    {"id": "example_id"}, None
-)
+animal, err = client.Animal().load({"id": "example_id"})
+print(animal)
 ```
 
 ### PHP
@@ -129,15 +122,17 @@ animal, err = client.Animal(None).load(
 <?php
 require_once 'extinctanimals_sdk.php';
 
-$client = new ExtinctAnimalsSDK([]);
+$client = new ExtinctAnimalsSDK([
+    "apikey" => getenv("EXTINCT-ANIMALS_APIKEY"),
+]);
 
 // List all animals
-[$animals, $err] = $client->Animal(null)->list(null, null);
+[$animals, $err] = $client->Animal()->list();
+print_r($animals);
 
 // Load a specific animal
-[$animal, $err] = $client->Animal(null)->load(
-    ["id" => "example_id"], null
-);
+[$animal, $err] = $client->Animal()->load(["id" => "example_id"]);
+print_r($animal);
 ```
 
 ### Golang
@@ -145,10 +140,13 @@ $client = new ExtinctAnimalsSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/extinct-animals-sdk/go"
 
-client := sdk.NewExtinctAnimalsSDK(map[string]any{})
+client := sdk.NewExtinctAnimalsSDK(map[string]any{
+    "apikey": os.Getenv("EXTINCT-ANIMALS_APIKEY"),
+})
 
 // List all animals
 animals, err := client.Animal(nil).List(nil, nil)
+fmt.Println(animals)
 ```
 
 ### Ruby
@@ -156,15 +154,17 @@ animals, err := client.Animal(nil).List(nil, nil)
 ```ruby
 require_relative "ExtinctAnimals_sdk"
 
-client = ExtinctAnimalsSDK.new({})
+client = ExtinctAnimalsSDK.new({
+  "apikey" => ENV["EXTINCT-ANIMALS_APIKEY"],
+})
 
 # List all animals
-animals, err = client.Animal(nil).list(nil, nil)
+animals, err = client.Animal().list
+puts animals
 
 # Load a specific animal
-animal, err = client.Animal(nil).load(
-  { "id" => "example_id" }, nil
-)
+animal, err = client.Animal().load({ "id" => "example_id" })
+puts animal
 ```
 
 ### Lua
@@ -172,15 +172,17 @@ animal, err = client.Animal(nil).load(
 ```lua
 local sdk = require("extinct-animals_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("EXTINCT-ANIMALS_APIKEY"),
+})
 
 -- List all animals
-local animals, err = client:Animal(nil):list(nil, nil)
+local animals, err = client:Animal():list()
+print(animals)
 
 -- Load a specific animal
-local animal, err = client:Animal(nil):load(
-  { id = "example_id" }, nil
-)
+local animal, err = client:Animal():load({ id = "example_id" })
+print(animal)
 ```
 
 ## Unit testing in offline mode
@@ -199,25 +201,21 @@ const result = await client.Animal().load({ id: 'test01' })
 ### Python
 
 ```python
-client = ExtinctAnimalsSDK.test(None, None)
-result, err = client.Animal(None).load(
-    {"id": "test01"}, None
-)
+client = ExtinctAnimalsSDK.test()
+result, err = client.Animal().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = ExtinctAnimalsSDK::test(null, null);
-[$result, $err] = $client->Animal(null)->load(
-    ["id" => "test01"], null
-);
+$client = ExtinctAnimalsSDK::test();
+[$result, $err] = $client->Animal()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Animal(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -226,19 +224,15 @@ result, err := client.Animal(nil).Load(
 ### Ruby
 
 ```ruby
-client = ExtinctAnimalsSDK.test(nil, nil)
-result, err = client.Animal(nil).load(
-  { "id" => "test01" }, nil
-)
+client = ExtinctAnimalsSDK.test
+result, err = client.Animal().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Animal(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Animal():load({ id = "test01" })
 ```
 
 ## How it works
@@ -342,16 +336,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Extinct Animals API
-
-- Upstream: [https://extinct-api.herokuapp.com/api/v1/animal](https://extinct-api.herokuapp.com/api/v1/animal)
-- API docs: [https://cheba-apis.vercel.app/](https://cheba-apis.vercel.app/)
-
-- The API itself ships without an explicit licence statement.
-- Animal data and descriptions are scraped from Wikipedia, so the underlying text is generally available under Wikipedia's CC BY-SA terms.
-- Image URLs point to Wikimedia Commons; consult each file page for its individual licence and attribution.
-- Attribute Wikipedia (and image authors) when redistributing.
 
 ---
 

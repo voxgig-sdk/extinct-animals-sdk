@@ -129,6 +129,7 @@ func animalBasicSetup(extra map[string]any) *entityTestSetup {
 		"EXTINCTANIMALS_TEST_ANIMAL_ENTID": idmap,
 		"EXTINCTANIMALS_TEST_LIVE":      "FALSE",
 		"EXTINCTANIMALS_TEST_EXPLAIN":   "FALSE",
+		"EXTINCTANIMALS_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["EXTINCTANIMALS_TEST_ANIMAL_ENTID"])
@@ -139,6 +140,7 @@ func animalBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["EXTINCTANIMALS_APIKEY"],
 			},
 			extra,
 		})

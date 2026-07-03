@@ -109,12 +109,14 @@ def _animal_direct_setup(mockres):
     env = runner.env_override({
         "EXTINCTANIMALS_TEST_ANIMAL_ENTID": {},
         "EXTINCTANIMALS_TEST_LIVE": "FALSE",
+        "EXTINCTANIMALS_APIKEY": "NONE",
     })
 
     live = env.get("EXTINCTANIMALS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("EXTINCTANIMALS_APIKEY"),
         }
         client = ExtinctAnimalsSDK(merged_opts)
         return {
