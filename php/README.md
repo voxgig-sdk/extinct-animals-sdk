@@ -10,7 +10,7 @@ The PHP SDK for the ExtinctAnimals API — an entity-oriented client using PHP c
 
 ## Install
 ```bash
-composer require voxgig/extinct-animals-sdk
+composer require voxgig-sdk/extinct-animals
 ```
 
 

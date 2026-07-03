@@ -10,7 +10,7 @@ The Lua SDK for the ExtinctAnimals API — an entity-oriented client using Lua c
 
 ## Install
 ```bash
-luarocks install extinct-animals-sdk
+luarocks install voxgig-sdk-extinct-animals
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,7 +10,7 @@ The Python SDK for the ExtinctAnimals API — an entity-oriented client followin
 
 ## Install
 ```bash
-pip install extinct-animals-sdk
+pip install voxgig-sdk-extinct-animals
 ```
 
 Or install from source:

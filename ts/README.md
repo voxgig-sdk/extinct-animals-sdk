@@ -10,7 +10,7 @@ The TypeScript SDK for the ExtinctAnimals API — a type-safe, entity-oriented c
 
 ## Install
 ```bash
-npm install extinct-animals
+npm install @voxgig-sdk/extinct-animals
 ```
 ## Tutorial: your first API call
 

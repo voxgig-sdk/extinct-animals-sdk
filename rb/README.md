@@ -10,13 +10,13 @@ The Ruby SDK for the ExtinctAnimals API — an entity-oriented client using idio
 
 ## Install
 ```bash
-gem install extinct-animals-sdk
+gem install voxgig-sdk-extinct-animals
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "extinct-animals-sdk"
+gem "voxgig-sdk-extinct-animals"
 ```
 
 Then run:
