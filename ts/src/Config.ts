@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://extinct-api.herokuapp.com/api/v1',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -176,7 +172,8 @@ class Config {
                     "name": "id",
                     "orig": "number",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },

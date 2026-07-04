@@ -98,7 +98,6 @@ function animal_basic_setup(extra)
     ["EXTINCTANIMALS_TEST_ANIMAL_ENTID"] = idmap,
     ["EXTINCTANIMALS_TEST_LIVE"] = "FALSE",
     ["EXTINCTANIMALS_TEST_EXPLAIN"] = "FALSE",
-    ["EXTINCTANIMALS_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -110,7 +109,6 @@ function animal_basic_setup(extra)
   if env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["EXTINCTANIMALS_APIKEY"],
       },
       extra or {},
     })

@@ -43,14 +43,12 @@ class AnimalEntityTest < Minitest::Test
     animal_ref01_ent = client.Animal(nil)
     animal_ref01_match = {}
 
-    animal_ref01_list_result, err = animal_ref01_ent.list(animal_ref01_match, nil)
-    assert_nil err
+    animal_ref01_list_result = animal_ref01_ent.list(animal_ref01_match, nil)
     assert animal_ref01_list_result.is_a?(Array)
 
     # LOAD
     animal_ref01_match_dt0 = {}
-    animal_ref01_data_dt0_loaded, err = animal_ref01_ent.load(animal_ref01_match_dt0, nil)
-    assert_nil err
+    animal_ref01_data_dt0_loaded = animal_ref01_ent.load(animal_ref01_match_dt0, nil)
     assert !animal_ref01_data_dt0_loaded.nil?
 
   end
@@ -89,7 +87,6 @@ def animal_basic_setup(extra)
     "EXTINCTANIMALS_TEST_ANIMAL_ENTID" => idmap,
     "EXTINCTANIMALS_TEST_LIVE" => "FALSE",
     "EXTINCTANIMALS_TEST_EXPLAIN" => "FALSE",
-    "EXTINCTANIMALS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -101,7 +98,6 @@ def animal_basic_setup(extra)
   if env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["EXTINCTANIMALS_APIKEY"],
       },
       extra || {},
     ])

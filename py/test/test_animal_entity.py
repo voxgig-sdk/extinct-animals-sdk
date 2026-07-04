@@ -50,14 +50,12 @@ class TestAnimalEntity:
         animal_ref01_ent = client.Animal(None)
         animal_ref01_match = {}
 
-        animal_ref01_list_result, err = animal_ref01_ent.list(animal_ref01_match, None)
-        assert err is None
+        animal_ref01_list_result = animal_ref01_ent.list(animal_ref01_match, None)
         assert isinstance(animal_ref01_list_result, list)
 
         # LOAD
         animal_ref01_match_dt0 = {}
-        animal_ref01_data_dt0_loaded, err = animal_ref01_ent.load(animal_ref01_match_dt0, None)
-        assert err is None
+        animal_ref01_data_dt0_loaded = animal_ref01_ent.load(animal_ref01_match_dt0, None)
         assert animal_ref01_data_dt0_loaded is not None
 
 
@@ -98,7 +96,6 @@ def _animal_basic_setup(extra):
         "EXTINCTANIMALS_TEST_ANIMAL_ENTID": idmap,
         "EXTINCTANIMALS_TEST_LIVE": "FALSE",
         "EXTINCTANIMALS_TEST_EXPLAIN": "FALSE",
-        "EXTINCTANIMALS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -109,7 +106,6 @@ def _animal_basic_setup(extra):
     if env.get("EXTINCTANIMALS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("EXTINCTANIMALS_APIKEY"),
             },
             extra or {},
         ])

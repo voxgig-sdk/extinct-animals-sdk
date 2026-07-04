@@ -245,6 +245,9 @@ func (sdk *ExtinctAnimalsSDK) Direct(fetchargs map[string]any) (map[string]any, 
 }
 
 
+// Animal returns a Animal entity bound to this client.
+// Idiomatic usage: client.Animal(nil).List(nil, nil) or
+// client.Animal(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *ExtinctAnimalsSDK) Animal(data map[string]any) ExtinctAnimalsEntity {
 	return NewAnimalEntityFunc(sdk, data)
 }

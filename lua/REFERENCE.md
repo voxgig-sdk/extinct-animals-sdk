@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -84,7 +83,7 @@ same parameters as `direct()`.
 ## AnimalEntity
 
 ```lua
-local animal = client:Animal(nil)
+local animal = client:animal(nil)
 ```
 
 ### Fields
@@ -108,7 +107,7 @@ local animal = client:Animal(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Animal():list()
+local results, err = client:animal():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -116,7 +115,7 @@ local results, err = client:Animal():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Animal():load({ id = "animal_id" })
+local result, err = client:animal():load({ id = "animal_id" })
 ```
 
 ### Common Methods

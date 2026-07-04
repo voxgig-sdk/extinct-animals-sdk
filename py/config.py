@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://extinct-api.herokuapp.com/api/v1",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -147,6 +144,7 @@ def make_config():
                       "orig": "number",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 0,
                     },
                   ],
                 },

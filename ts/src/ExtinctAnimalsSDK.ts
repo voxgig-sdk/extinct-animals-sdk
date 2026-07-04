@@ -2,6 +2,8 @@
 
 import { AnimalEntity } from './entity/AnimalEntity'
 
+export type * from './ExtinctAnimalsTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class ExtinctAnimalsSDK {
 
 
 
+  _animal?: AnimalEntity
+
+  // Idiomatic facade: `client.animal.list()` / `client.animal.load({ id })`.
+  get animal(): AnimalEntity {
+    return (this._animal ??= new AnimalEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.animal` instead. */
   Animal(data?: any) {
     const self = this
     return new AnimalEntity(self,data)

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AnimalLoadMatch
+---@param ctrl? table
+---@return Animal
+---@return string? err
 function AnimalEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch AnimalListMatch
+---@param ctrl? table
+---@return Animal[]
+---@return string? err
 function AnimalEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

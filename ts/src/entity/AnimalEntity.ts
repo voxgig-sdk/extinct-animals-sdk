@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Animal,
+  AnimalLoadMatch,
+  AnimalListMatch,
+} from '../ExtinctAnimalsTypes'
 
 // TODO: needs Entity superclass
-class AnimalEntity extends ExtinctAnimalsEntityBase {
+class AnimalEntity extends ExtinctAnimalsEntityBase<Animal> {
 
   constructor(client: ExtinctAnimalsSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class AnimalEntity extends ExtinctAnimalsEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: AnimalLoadMatch, ctrl?: Control): Promise<Animal> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class AnimalEntity extends ExtinctAnimalsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Animal> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: AnimalListMatch, ctrl?: Control): Promise<Animal[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class AnimalEntity extends ExtinctAnimalsEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Animal[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

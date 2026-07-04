@@ -9,9 +9,12 @@ The TypeScript SDK for the ExtinctAnimals API — a type-safe, entity-oriented c
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/extinct-animals
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/extinct-animals-sdk/releases](https://github.com/voxgig-sdk/extinct-animals-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ExtinctAnimalsSDK } from 'extinct-animals'
+import { ExtinctAnimalsSDK } from '@voxgig-sdk/extinct-animals'
 
-const client = new ExtinctAnimalsSDK({
-  apikey: process.env.EXTINCT-ANIMALS_APIKEY,
-})
+const client = new ExtinctAnimalsSDK()
 ```
 
 ### 2. List animals
 
 ```ts
-const result = await client.Animal().list()
+const result = await client.animal.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -39,10 +40,10 @@ if (result.ok) {
 }
 ```
 
-### 3. Load a animal
+### 3. Load an animal
 
 ```ts
-const result = await client.Animal().load({ id: 'example_id' })
+const result = await client.animal.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -91,7 +92,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExtinctAnimalsSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.animal.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -99,7 +100,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new ExtinctAnimalsSDK({ apikey: '...' })
+const client = new ExtinctAnimalsSDK()
 const testClient = client.tester()
 ```
 
@@ -108,7 +109,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.animal
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -135,7 +136,6 @@ const logger = {
 }
 
 const client = new ExtinctAnimalsSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -145,8 +145,7 @@ const client = new ExtinctAnimalsSDK({
 Create a `.env.local` file at the project root:
 
 ```
-EXTINCT-ANIMALS_TEST_LIVE=TRUE
-EXTINCT-ANIMALS_APIKEY=<your-key>
+EXTINCT_ANIMALS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -164,7 +163,6 @@ cd ts && npm test
 
 ```ts
 new ExtinctAnimalsSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -175,7 +173,6 @@ new ExtinctAnimalsSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -286,7 +283,7 @@ API path: `/animal/`
 
 ### Animal
 
-Create an instance: `const animal = client.Animal()`
+Create an instance: `const animal = client.animal`
 
 #### Operations
 
@@ -312,13 +309,13 @@ Create an instance: `const animal = client.Animal()`
 #### Example: Load
 
 ```ts
-const animal = await client.Animal().load({ id: 'animal_id' })
+const animal = await client.animal.load({ id: 'animal_id' })
 ```
 
 #### Example: List
 
 ```ts
-const animals = await client.Animal().list()
+const animals = await client.animal.list()
 ```
 
 
@@ -379,7 +376,7 @@ extinct-animals/
 Import the SDK from the package root:
 
 ```ts
-import { ExtinctAnimalsSDK } from 'extinct-animals'
+import { ExtinctAnimalsSDK } from '@voxgig-sdk/extinct-animals'
 ```
 
 ### Entity state
@@ -389,11 +386,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const animal = client.animal
+await animal.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// animal.data() now returns the loaded animal data
+// animal.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration
