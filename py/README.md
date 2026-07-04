@@ -31,24 +31,28 @@ from extinctanimals_sdk import ExtinctAnimalsSDK
 client = ExtinctAnimalsSDK()
 ```
 
-### 2. List animals
+### 2. List animal records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.animal.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    animals = client.Animal().list({})
+    for animal in animals:
+        print(animal)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load an animal
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.animal.load({"id": "example_id"})
-    print(result)
+    animal = client.Animal().load({"id": "example_id"})
+    print(animal)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ExtinctAnimalsSDK.test()
 
-result = client.animal.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+animal = client.Animal().load({"id": "test01"})
+# animal contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -173,7 +178,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Animal` | `(data) -> AnimalEntity` | Create a Animal entity instance. |
+| `Animal` | `(data) -> AnimalEntity` | Create an Animal entity instance. |
 
 ### Entity interface
 
@@ -238,7 +243,7 @@ API path: `/animal/`
 
 ### Animal
 
-Create an instance: `const animal = client.animal`
+Create an instance: `animal = client.Animal()`
 
 #### Operations
 
@@ -263,14 +268,14 @@ Create an instance: `const animal = client.animal`
 
 #### Example: Load
 
-```ts
-const animal = await client.animal.load({ id: 'animal_id' })
+```python
+animal = client.Animal().load({"id": "animal_id"})
 ```
 
 #### Example: List
 
-```ts
-const animals = await client.animal.list()
+```python
+animals = client.Animal().list({})
 ```
 
 
@@ -344,7 +349,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-animal = client.animal
+animal = client.Animal()
 animal.load({"id": "example_id"})
 
 # animal.data_get() now returns the loaded animal data

@@ -28,16 +28,14 @@ require_relative "ExtinctAnimals_sdk"
 client = ExtinctAnimalsSDK.new
 ```
 
-### 2. List animals
+### 2. List animal records
 
 ```ruby
 begin
-  result = client.animal.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Animal records — iterate directly.
+  animals = client.Animal.list
+  animals.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.animal.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Animal record (raises on error).
+  animal = client.Animal.load({ "id" => "example_id" })
+  puts animal
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = ExtinctAnimalsSDK.test
+client = ExtinctAnimalsSDK.test({
+  "entity" => { "animal" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.animal.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+animal = client.Animal.load({ "id" => "test01" })
+puts animal
 ```
 
 ### Use a custom fetch function
@@ -178,7 +181,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Animal` | `(data) -> AnimalEntity` | Create a Animal entity instance. |
+| `Animal` | `(data) -> AnimalEntity` | Create an Animal entity instance. |
 
 ### Entity interface
 
@@ -242,7 +245,7 @@ API path: `/animal/`
 
 ### Animal
 
-Create an instance: `const animal = client.animal`
+Create an instance: `animal = client.Animal`
 
 #### Operations
 
@@ -267,14 +270,16 @@ Create an instance: `const animal = client.animal`
 
 #### Example: Load
 
-```ts
-const animal = await client.animal.load({ id: 'animal_id' })
+```ruby
+# load returns the bare Animal record (raises on error).
+animal = client.Animal.load({ "id" => "animal_id" })
 ```
 
 #### Example: List
 
-```ts
-const animals = await client.animal.list()
+```ruby
+# list returns an Array of Animal records (raises on error).
+animals = client.Animal.list
 ```
 
 
@@ -349,7 +354,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-animal = client.animal
+animal = client.Animal
 animal.load({ "id" => "example_id" })
 
 # animal.data_get now returns the loaded animal data

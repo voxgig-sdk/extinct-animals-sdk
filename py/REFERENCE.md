@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AnimalEntity
 
 ```python
-animal = client.animal
+animal = client.Animal()
 ```
 
 ### Fields
@@ -104,7 +104,9 @@ animal = client.animal
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.animal.list({})
+results = client.Animal().list({})
+for animal in results:
+    print(animal)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -112,7 +114,7 @@ results = client.animal.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.animal.load({"id": "animal_id"})
+result = client.Animal().load({"id": "animal_id"})
 ```
 
 ### Common Methods

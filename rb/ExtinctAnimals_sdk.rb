@@ -208,13 +208,7 @@ class ExtinctAnimalsSDK
   end
 
 
-  # Idiomatic facade: client.animal.list / client.animal.load({ "id" => ... })
-  def animal
-    require_relative 'entity/animal_entity'
-    @animal ||= AnimalEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.animal instead.
+  # Canonical facade: client.Animal.list / client.Animal.load({ "id" => ... })
   def Animal(data = nil)
     require_relative 'entity/animal_entity'
     AnimalEntity.new(self, data)

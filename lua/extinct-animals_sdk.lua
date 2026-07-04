@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:animal():list() / client:animal():load({ id = ... })
-function ExtinctAnimalsSDK:animal(data)
+-- Idiomatic facade: client:Animal():list() / client:Animal():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function ExtinctAnimalsSDK:Animal(data)
   local EntityMod = require("entity.animal_entity")
   if data == nil then
     if self._animal == nil then
@@ -253,12 +254,6 @@ function ExtinctAnimalsSDK:animal(data)
     end
     return self._animal
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:animal() instead.
-function ExtinctAnimalsSDK:Animal(data)
-  local EntityMod = require("entity.animal_entity")
   return EntityMod.new(self, data)
 end
 

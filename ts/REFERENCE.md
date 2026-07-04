@@ -109,7 +109,7 @@ Alias for `ExtinctAnimalsSDK.test()`.
 ## AnimalEntity
 
 ```ts
-const animal = client.animal
+const animal = client.Animal()
 ```
 
 ### Fields
@@ -133,7 +133,7 @@ const animal = client.animal
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.animal.list()
+const results = await client.Animal().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -141,7 +141,7 @@ const results = await client.animal.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.animal.load({ id: 'animal_id' })
+const result = await client.Animal().load({ id: 'animal_id' })
 ```
 
 ### Common Methods

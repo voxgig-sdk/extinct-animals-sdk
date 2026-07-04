@@ -28,25 +28,28 @@ import { ExtinctAnimalsSDK } from '@voxgig-sdk/extinct-animals'
 const client = new ExtinctAnimalsSDK()
 ```
 
-### 2. List animals
+### 2. List animal records
+
+`list()` resolves to an array of Animal objects — iterate it directly:
 
 ```ts
-const result = await client.animal.list()
+const animals = await client.Animal().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const animal of animals) {
+  console.log(animal)
 }
 ```
 
 ### 3. Load an animal
 
-```ts
-const result = await client.animal.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const animal = await client.Animal().load({ id: 'example_id' })
+  console.log(animal)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -64,6 +67,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -92,9 +98,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ExtinctAnimalsSDK.test()
 
-const result = await client.animal.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const animal = await client.Animal().load({ id: 'test01' })
+// animal is a bare entity populated with mock response data
+console.log(animal)
 ```
 
 You can also use the instance method:
@@ -109,7 +115,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.animal
+const entity = client.Animal()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -187,7 +193,7 @@ new ExtinctAnimalsSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Animal(data?)` | `AnimalEntity` | Create a Animal entity instance. |
+| `Animal(data?)` | `AnimalEntity` | Create an Animal entity instance. |
 | `tester(testopts?, sdkopts?)` | `ExtinctAnimalsSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -204,29 +210,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): ExtinctAnimalsSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -283,7 +290,7 @@ API path: `/animal/`
 
 ### Animal
 
-Create an instance: `const animal = client.animal`
+Create an instance: `const animal = client.Animal()`
 
 #### Operations
 
@@ -309,13 +316,13 @@ Create an instance: `const animal = client.animal`
 #### Example: Load
 
 ```ts
-const animal = await client.animal.load({ id: 'animal_id' })
+const animal = await client.Animal().load({ id: 'animal_id' })
 ```
 
 #### Example: List
 
 ```ts
-const animals = await client.animal.list()
+const animals = await client.Animal().list()
 ```
 
 
@@ -386,7 +393,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const animal = client.animal
+const animal = client.Animal()
 await animal.load({ id: "example_id" })
 
 // animal.data() now returns the loaded animal data

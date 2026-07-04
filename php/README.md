@@ -29,18 +29,16 @@ require_once 'extinctanimals_sdk.php';
 $client = new ExtinctAnimalsSDK();
 ```
 
-### 2. List animals
+### 2. List animal records
 
 ```php
 try {
-    $result = $client->animal()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Animal records — iterate directly.
+    $animals = $client->Animal()->list();
+    foreach ($animals as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->animal()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Animal record (throws on error).
+    $animal = $client->Animal()->load(["id" => "example_id"]);
+    print_r($animal);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = ExtinctAnimalsSDK::test();
+$client = ExtinctAnimalsSDK::test([
+    "entity" => ["animal" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->animal()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$animal = $client->Animal()->load(["id" => "test01"]);
+print_r($animal);
 ```
 
 ### Use a custom fetch function
@@ -182,7 +185,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `Animal` | `($data): AnimalEntity` | Create a Animal entity instance. |
+| `Animal` | `($data): AnimalEntity` | Create an Animal entity instance. |
 
 ### Entity interface
 
@@ -247,7 +250,7 @@ API path: `/animal/`
 
 ### Animal
 
-Create an instance: `const animal = client.animal`
+Create an instance: `$animal = $client->Animal();`
 
 #### Operations
 
@@ -272,14 +275,16 @@ Create an instance: `const animal = client.animal`
 
 #### Example: Load
 
-```ts
-const animal = await client.animal.load({ id: 'animal_id' })
+```php
+// load() returns the bare Animal record (throws on error).
+$animal = $client->Animal()->load(["id" => "animal_id"]);
 ```
 
 #### Example: List
 
-```ts
-const animals = await client.animal.list()
+```php
+// list() returns an array of Animal records (throws on error).
+$animals = $client->Animal()->list();
 ```
 
 
@@ -354,7 +359,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$animal = $client->animal();
+$animal = $client->Animal();
 $animal->load(["id" => "example_id"]);
 
 // $animal->dataGet() now returns the loaded animal data

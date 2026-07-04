@@ -204,14 +204,7 @@ class ExtinctAnimalsSDK {
 
 
 
-  _animal?: AnimalEntity
-
-  // Idiomatic facade: `client.animal.list()` / `client.animal.load({ id })`.
-  get animal(): AnimalEntity {
-    return (this._animal ??= new AnimalEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.animal` instead. */
+  // Entity access: `client.Animal().list()` / `client.Animal().load({ id })`.
   Animal(data?: any) {
     const self = this
     return new AnimalEntity(self,data)

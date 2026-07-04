@@ -26,9 +26,11 @@ import { ExtinctAnimalsSDK } from '@voxgig-sdk/extinct-animals'
 
 const client = new ExtinctAnimalsSDK()
 
-// List all animals
-const animals = await client.animal.list()
-console.log(animals.data)
+// List all animals (returns Animal[])
+const animals = await client.Animal().list()
+for (const animal of animals) {
+  console.log(animal)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -83,12 +85,13 @@ from extinctanimals_sdk import ExtinctAnimalsSDK
 
 client = ExtinctAnimalsSDK()
 
-# List all animals
-animals = client.animal.list()
-print(animals)
+# List all animals (returns a list, raises on error)
+animals = client.Animal().list({})
+for animal in animals:
+    print(animal)
 
-# Load a specific animal
-animal = client.animal.load({"id": "example_id"})
+# Load a specific animal (returns the record, raises on error)
+animal = client.Animal().load({"id": "example_id"})
 print(animal)
 ```
 
@@ -100,12 +103,12 @@ require_once 'extinctanimals_sdk.php';
 
 $client = new ExtinctAnimalsSDK();
 
-// List all animals (throws on error)
-$animals = $client->animal()->list();
+// List all animals (returns an array; throws on error)
+$animals = $client->Animal()->list();
 print_r($animals);
 
-// Load a specific animal
-$animal = $client->animal()->load(["id" => "example_id"]);
+// Load a specific animal (returns the bare record; throws on error)
+$animal = $client->Animal()->load(["id" => "example_id"]);
 print_r($animal);
 ```
 
@@ -128,12 +131,12 @@ require_relative "ExtinctAnimals_sdk"
 
 client = ExtinctAnimalsSDK.new
 
-# List all animals
-animals = client.animal.list
+# List all animals (returns an Array; raises on error)
+animals = client.Animal.list
 puts animals
 
-# Load a specific animal
-animal = client.animal.load({ "id" => "example_id" })
+# Load a specific animal (returns the bare record; raises on error)
+animal = client.Animal.load({ "id" => "example_id" })
 puts animal
 ```
 
@@ -145,11 +148,11 @@ local sdk = require("extinct-animals_sdk")
 local client = sdk.new()
 
 -- List all animals
-local animals, err = client:animal():list()
+local animals, err = client:Animal():list()
 print(animals)
 
 -- Load a specific animal
-local animal, err = client:animal():load({ id = "example_id" })
+local animal, err = client:Animal():load({ id = "example_id" })
 print(animal)
 ```
 
@@ -162,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = ExtinctAnimalsSDK.test()
-const result = await client.animal.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const animal = await client.Animal().load({ id: 'test01' })
+// animal is a bare Animal populated with mock data
+console.log(animal)
 ```
 
 ### Python
 
 ```python
 client = ExtinctAnimalsSDK.test()
-result = client.animal.load({"id": "test01"})
+animal = client.Animal().load({"id": "test01"})
+print(animal)
 ```
 
 ### PHP
 
 ```php
-$client = ExtinctAnimalsSDK::test();
-$result = $client->animal()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = ExtinctAnimalsSDK::test([
+    "entity" => ["animal" => ["test01" => ["id" => "test01"]]],
+]);
+$animal = $client->Animal()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -192,15 +200,18 @@ result, err := client.Animal(nil).Load(
 ### Ruby
 
 ```ruby
-client = ExtinctAnimalsSDK.test
-result = client.animal.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = ExtinctAnimalsSDK.test({
+  "entity" => { "animal" => { "test01" => { "id" => "test01" } } },
+})
+animal = client.Animal.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:animal():load({ id = "test01" })
+local result, err = client:Animal():load({ id = "test01" })
 ```
 
 ## How it works
@@ -248,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

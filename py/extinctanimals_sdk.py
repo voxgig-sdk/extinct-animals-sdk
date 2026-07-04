@@ -220,25 +220,15 @@ class ExtinctAnimalsSDK:
         }
 
 
-    @property
-    def animal(self):
-        """Idiomatic facade: client.animal.list() / client.animal.load({"id": ...})."""
-        from entity.animal_entity import AnimalEntity
-        cached = getattr(self, "_animal", None)
-        if cached is None:
-            cached = AnimalEntity(self, None)
-            self._animal = cached
-        return cached
-
-    def Animal(self, data=None):
-        # Deprecated: use client.animal instead.
+    def Animal(self, data=None) -> "AnimalEntity":
+        """Entity factory: client.Animal().list({}) / client.Animal().load({"id": ...})."""
         from entity.animal_entity import AnimalEntity
         return AnimalEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "ExtinctAnimalsSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class ExtinctAnimalsSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.animal_entity import AnimalEntity
