@@ -8,7 +8,7 @@ Complete API reference for the ExtinctAnimals Python SDK.
 ### Constructor
 
 ```python
-from extinct-animals_sdk import ExtinctAnimalsSDK
+from extinctanimals_sdk import ExtinctAnimalsSDK
 
 client = ExtinctAnimalsSDK(options)
 ```
@@ -87,24 +87,24 @@ animal = client.Animal()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | ``$STRING`` | Yes |  |
-| `common_name` | ``$STRING`` | No |  |
-| `data` | ``$ARRAY`` | Yes |  |
-| `image_src` | ``$STRING`` | No |  |
-| `last_record` | ``$STRING`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `short_desc` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | Yes |  |
-| `wiki_link` | ``$STRING`` | No |  |
+| `binomial_name` | `str` | Yes |  |
+| `common_name` | `str` | No |  |
+| `data` | `list` | Yes |  |
+| `image_src` | `str` | No |  |
+| `last_record` | `str` | No |  |
+| `location` | `str` | No |  |
+| `short_desc` | `str` | No |  |
+| `status` | `str` | Yes |  |
+| `wiki_link` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Animal().list({})
+results = client.Animal().list()
 for animal in results:
     print(animal)
 ```

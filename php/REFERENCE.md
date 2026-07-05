@@ -8,7 +8,7 @@ Complete API reference for the ExtinctAnimals PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/extinct-animals_sdk.php';
+require_once __DIR__ . '/extinctanimals_sdk.php';
 
 $client = new ExtinctAnimalsSDK($options);
 ```
@@ -45,11 +45,11 @@ $client = ExtinctAnimalsSDK::test();
 
 Create a new `AnimalEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): ExtinctAnimalsUtility`
 
 Return a copy of the SDK utility object.
 
@@ -92,24 +92,24 @@ $animal = $client->Animal();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | ``$STRING`` | Yes |  |
-| `common_name` | ``$STRING`` | No |  |
-| `data` | ``$ARRAY`` | Yes |  |
-| `image_src` | ``$STRING`` | No |  |
-| `last_record` | ``$STRING`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `short_desc` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | Yes |  |
-| `wiki_link` | ``$STRING`` | No |  |
+| `binomial_name` | `string` | Yes |  |
+| `common_name` | `string` | No |  |
+| `data` | `array` | Yes |  |
+| `image_src` | `string` | No |  |
+| `last_record` | `string` | No |  |
+| `location` | `string` | No |  |
+| `short_desc` | `string` | No |  |
+| `status` | `string` | Yes |  |
+| `wiki_link` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Animal()->list([]);
+$results = $client->Animal()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -122,19 +122,19 @@ $result = $client->Animal()->load(["id" => "animal_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -143,7 +143,7 @@ Set the entity match criteria.
 Create a new `AnimalEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

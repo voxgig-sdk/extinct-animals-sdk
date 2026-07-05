@@ -21,5 +21,15 @@ export interface AnimalLoadMatch {
   id: number
 }
 
-export type AnimalListMatch = Partial<Animal>
+export interface AnimalListMatch {
+  binomial_name?: string
+  common_name?: string
+  data?: any[]
+  image_src?: string
+  last_record?: string
+  location?: string
+  short_desc?: string
+  status?: string
+  wiki_link?: string
+}
 

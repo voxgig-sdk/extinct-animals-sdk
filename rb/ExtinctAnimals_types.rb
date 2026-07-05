@@ -58,7 +58,7 @@ AnimalLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Animal#list (any subset of Animal fields).
+# Request payload for Animal#list.
 #
 # @!attribute [rw] binomial_name
 #   @return [String, nil]

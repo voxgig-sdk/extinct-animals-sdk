@@ -21,6 +21,15 @@
 ---@field id number
 
 ---@class AnimalListMatch
+---@field binomial_name? string
+---@field common_name? string
+---@field data? table
+---@field image_src? string
+---@field last_record? string
+---@field location? string
+---@field short_desc? string
+---@field status? string
+---@field wiki_link? string
 
 local M = {}
 

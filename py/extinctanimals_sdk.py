@@ -221,7 +221,7 @@ class ExtinctAnimalsSDK:
 
 
     def Animal(self, data=None) -> "AnimalEntity":
-        """Entity factory: client.Animal().list({}) / client.Animal().load({"id": ...})."""
+        """Entity factory: client.Animal().list() / client.Animal().load({"id": ...})."""
         from entity.animal_entity import AnimalEntity
         return AnimalEntity(self, data)
 

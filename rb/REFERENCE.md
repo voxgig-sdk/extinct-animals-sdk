@@ -8,7 +8,7 @@ Complete API reference for the ExtinctAnimals Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'extinct-animals_sdk'
+require_relative 'ExtinctAnimals_sdk'
 
 client = ExtinctAnimalsSDK.new(options)
 ```
@@ -93,24 +93,24 @@ animal = client.Animal
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | ``$STRING`` | Yes |  |
-| `common_name` | ``$STRING`` | No |  |
-| `data` | ``$ARRAY`` | Yes |  |
-| `image_src` | ``$STRING`` | No |  |
-| `last_record` | ``$STRING`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `short_desc` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | Yes |  |
-| `wiki_link` | ``$STRING`` | No |  |
+| `binomial_name` | `String` | Yes |  |
+| `common_name` | `String` | No |  |
+| `data` | `Array` | Yes |  |
+| `image_src` | `String` | No |  |
+| `last_record` | `String` | No |  |
+| `location` | `String` | No |  |
+| `short_desc` | `String` | No |  |
+| `status` | `String` | Yes |  |
+| `wiki_link` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Animal.list(nil)
+results = client.Animal.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

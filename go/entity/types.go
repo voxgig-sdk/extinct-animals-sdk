@@ -26,8 +26,7 @@ type AnimalLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// AnimalListMatch mirrors the animal fields as an all-optional match
-// filter (Go analog of Partial<Animal>).
+// AnimalListMatch is the typed request payload for Animal.ListTyped.
 type AnimalListMatch struct {
 	BinomialName *string `json:"binomial_name,omitempty"`
 	CommonName *string `json:"common_name,omitempty"`

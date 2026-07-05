@@ -32,7 +32,7 @@ class AnimalLoadMatch
     public int $id;
 }
 
-/** Match filter for Animal#list (any subset of Animal fields). */
+/** Request payload for Animal#list. */
 class AnimalListMatch
 {
     public ?string $binomial_name = null;

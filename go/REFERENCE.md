@@ -97,15 +97,15 @@ animal := client.Animal(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | ``$STRING`` | Yes |  |
-| `common_name` | ``$STRING`` | No |  |
-| `data` | ``$ARRAY`` | Yes |  |
-| `image_src` | ``$STRING`` | No |  |
-| `last_record` | ``$STRING`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `short_desc` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | Yes |  |
-| `wiki_link` | ``$STRING`` | No |  |
+| `binomial_name` | `string` | Yes |  |
+| `common_name` | `string` | No |  |
+| `data` | `[]any` | Yes |  |
+| `image_src` | `string` | No |  |
+| `last_record` | `string` | No |  |
+| `location` | `string` | No |  |
+| `short_desc` | `string` | No |  |
+| `status` | `string` | Yes |  |
+| `wiki_link` | `string` | No |  |
 
 ### Operations
 
