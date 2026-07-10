@@ -117,7 +117,7 @@ $results = $client->Animal()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Animal()->load(["id" => "animal_id"]);
+$result = $client->Animal()->load(["id" => 1]);
 ```
 
 ### Common Methods

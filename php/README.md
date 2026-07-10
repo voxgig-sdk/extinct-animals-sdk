@@ -50,7 +50,7 @@ try {
 ```php
 try {
     // load() returns the bare Animal record (throws on error).
-    $animal = $client->Animal()->load(["id" => "example_id"]);
+    $animal = $client->Animal()->load(["id" => 1]);
     print_r($animal);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -310,7 +310,7 @@ Create an instance: `$animal = $client->Animal();`
 
 ```php
 // load() returns the bare Animal record (throws on error).
-$animal = $client->Animal()->load(["id" => "animal_id"]);
+$animal = $client->Animal()->load(["id" => 1]);
 ```
 
 #### Example: List

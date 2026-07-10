@@ -15,9 +15,9 @@ main: {
           url: "https://extinct-api.herokuapp.com/api/v1"
         }
       ]
+      summary: "This API provides information about animals that became extinct in the last 11,650 years, known as the Holocene extinction."
       title: "Extinct Animals API"
       version: "1.0.0"
+      website: "https://extinct-api.herokuapp.com"
     }
   }
-}
-

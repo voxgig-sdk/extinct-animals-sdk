@@ -115,7 +115,7 @@ local results, err = client:Animal():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Animal():load({ id = "animal_id" })
+local result, err = client:Animal():load({ id = 1 })
 ```
 
 ### Common Methods

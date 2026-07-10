@@ -114,7 +114,7 @@ for animal in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Animal().load({"id": "animal_id"})
+result = client.Animal().load({"id": 1})
 ```
 
 ### Common Methods

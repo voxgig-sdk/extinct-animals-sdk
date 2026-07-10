@@ -50,7 +50,7 @@ end
 ### 3. Load an animal
 
 ```lua
-local animal, err = client:Animal():load({ id = "example_id" })
+local animal, err = client:Animal():load({ id = 1 })
 if err then error(err) end
 print(animal)
 ```
@@ -288,7 +288,7 @@ Create an instance: `local animal = client:Animal(nil)`
 #### Example: Load
 
 ```lua
-local animal, err = client:Animal():load({ id = "animal_id" })
+local animal, err = client:Animal():load({ id = 1 })
 ```
 
 #### Example: List

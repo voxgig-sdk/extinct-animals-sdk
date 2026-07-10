@@ -56,7 +56,7 @@ except Exception as err:
 
 ```python
 try:
-    animal = client.Animal().load({"id": "example_id"})
+    animal = client.Animal().load({"id": 1})
     print(animal)
 except Exception as err:
     print(f"load failed: {err}")
@@ -302,7 +302,7 @@ Create an instance: `animal = client.Animal()`
 #### Example: Load
 
 ```python
-animal = client.Animal().load({"id": "animal_id"})
+animal = client.Animal().load({"id": 1})
 ```
 
 #### Example: List

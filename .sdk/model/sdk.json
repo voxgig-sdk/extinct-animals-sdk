@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -317,14 +314,17 @@
           "url": "https://cheba-apis.vercel.app/"
         },
         "description": "This API provides information about animals that became extinct in the last 11,650 years, known as the Holocene extinction. It gathers data from Wikipedia and individual animal pages, allowing users to retrieve information about these extinct species, including their names and last recorded sightings. The API contains 804 extinct animals with data scraped from Wikipedia.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Production server (Note: Goes to sleep after 30 minutes of inactivity)",
             "url": "https://extinct-api.herokuapp.com/api/v1"
           }
         ],
+        "summary": "This API provides information about animals that became extinct in the last 11,650 years, known as the Holocene extinction.",
         "title": "Extinct Animals API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://extinct-api.herokuapp.com"
       },
       "option": {},
       "target": {
@@ -377,6 +377,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -427,6 +430,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
