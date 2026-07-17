@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- ExtinctAnimals SDK exists test
 
 local sdk = require("extinct-animals_sdk")
 
