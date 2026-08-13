@@ -37,7 +37,7 @@ begin
   # list returns an Array of Animal records — iterate directly.
   animals = client.Animal.list
   animals.each do |item|
-    puts "#{item["binomial_name"]}"
+    puts "#{item["binomialName"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Animal record (raises on error).
+  # load returns the ENTITY — call data_get for the Animal record (raises on error).
   animal = client.Animal.load({ "id" => 1 })
   puts animal
 rescue => err
@@ -134,7 +134,8 @@ client = ExtinctAnimalsSDK.test({
   "entity" => { "animal" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 animal = client.Animal.list()
 puts animal
 ```
@@ -252,15 +253,15 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `binomial_name` |  |
-| `common_name` |  |
+| `binomialName` |  |
+| `commonName` |  |
 | `data` |  |
-| `image_src` |  |
-| `last_record` |  |
+| `imageSrc` |  |
+| `lastRecord` |  |
 | `location` |  |
-| `short_desc` |  |
+| `shortDesc` |  |
 | `status` |  |
-| `wiki_link` |  |
+| `wikiLink` |  |
 
 Operations: List, Load.
 
@@ -286,20 +287,20 @@ Create an instance: `animal = client.Animal`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `binomial_name` | `String` |  |
-| `common_name` | `String` |  |
+| `binomialName` | `String` |  |
+| `commonName` | `String` |  |
 | `data` | `Array` |  |
-| `image_src` | `String` |  |
-| `last_record` | `String` |  |
+| `imageSrc` | `String` |  |
+| `lastRecord` | `String` |  |
 | `location` | `String` |  |
-| `short_desc` | `String` |  |
+| `shortDesc` | `String` |  |
 | `status` | `String` |  |
-| `wiki_link` | `String` |  |
+| `wikiLink` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Animal record (raises on error).
+# load returns the ENTITY — call data_get for the Animal record (raises on error).
 animal = client.Animal.load({ "id" => 1 })
 ```
 

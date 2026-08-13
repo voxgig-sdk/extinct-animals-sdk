@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = ExtinctAnimalsSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = ExtinctAnimalsSDK.test({
+  entity: {
+    animal: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const animals = await client.Animal().list()
-// animals is an array of bare Animal records populated with mock data
+// animals is an array of Animal entities, populated with mock data
+// — call animals[0].data() for the record itself
 console.log(animals)
 ```
 
@@ -110,7 +119,7 @@ import { ExtinctAnimalsSDK } from '@voxgig-sdk/extinct-animals'
 
 const client = new ExtinctAnimalsSDK()
 
-// List all animals (returns Animal[])
+// List all animals (returns AnimalEntity[] — .data() for the record)
 const animals = await client.Animal().list()
 for (const animal of animals) {
   console.log(animal)
@@ -191,7 +200,7 @@ $client = new ExtinctAnimalsSDK();
 $animals = $client->Animal()->list();
 print_r($animals);
 
-// Load a specific animal (returns the bare record; throws on error)
+// Load a specific animal (returns the ENTITY; call data_get() for the record; throws on error)
 $animal = $client->Animal()->load(["id" => 1]);
 print_r($animal);
 ```
@@ -222,7 +231,7 @@ client = ExtinctAnimalsSDK.new
 animals = client.Animal.list
 puts animals
 
-# Load a specific animal (returns the bare record; raises on error)
+# Load a specific animal (returns the ENTITY; call data_get for the record)
 animal = client.Animal.load({ "id" => 1 })
 puts animal
 ```
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://cheba-apis.vercel.app/](https://cheba-apis.vercel.app/)
 

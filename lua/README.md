@@ -43,7 +43,7 @@ local animals, err = client:Animal():list()
 if err then error(err) end
 
 for _, item in ipairs(animals) do
-  print(item["binomial_name"])
+  print(item["binomialName"])
 end
 ```
 
@@ -241,15 +241,15 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `binomial_name` |  |
-| `common_name` |  |
+| `binomialName` |  |
+| `commonName` |  |
 | `data` |  |
-| `image_src` |  |
-| `last_record` |  |
+| `imageSrc` |  |
+| `lastRecord` |  |
 | `location` |  |
-| `short_desc` |  |
+| `shortDesc` |  |
 | `status` |  |
-| `wiki_link` |  |
+| `wikiLink` |  |
 
 Operations: List, Load.
 
@@ -275,15 +275,15 @@ Create an instance: `local animal = client:Animal(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `binomial_name` | `string` |  |
-| `common_name` | `string` |  |
+| `binomialName` | `string` |  |
+| `commonName` | `string` |  |
 | `data` | `table` |  |
-| `image_src` | `string` |  |
-| `last_record` | `string` |  |
+| `imageSrc` | `string` |  |
+| `lastRecord` | `string` |  |
 | `location` | `string` |  |
-| `short_desc` | `string` |  |
+| `shortDesc` | `string` |  |
 | `status` | `string` |  |
-| `wiki_link` | `string` |  |
+| `wikiLink` | `string` |  |
 
 #### Example: Load
 

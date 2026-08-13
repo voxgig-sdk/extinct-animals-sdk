@@ -23,8 +23,8 @@ module ExtinctAnimalsTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("EXTINCTANIMALS_TEST_LIVE")
-    override = getenv("EXTINCTANIMALS_TEST_OVERRIDE")
+    live = getenv("EXTINCT_ANIMALS_TEST_LIVE")
+    override = getenv("EXTINCT_ANIMALS_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module ExtinctAnimalsTestRunner
       end
     end
 
-    explain = getenv("EXTINCTANIMALS_TEST_EXPLAIN")
-    m["EXTINCTANIMALS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("EXTINCT_ANIMALS_TEST_EXPLAIN")
+    m["EXTINCT_ANIMALS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

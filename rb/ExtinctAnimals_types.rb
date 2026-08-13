@@ -10,42 +10,42 @@
 
 # Animal entity data model.
 #
-# @!attribute [rw] binomial_name
+# @!attribute [rw] binomialName
 #   @return [String]
 #
-# @!attribute [rw] common_name
+# @!attribute [rw] commonName
 #   @return [String, nil]
 #
 # @!attribute [rw] data
 #   @return [Array]
 #
-# @!attribute [rw] image_src
+# @!attribute [rw] imageSrc
 #   @return [String, nil]
 #
-# @!attribute [rw] last_record
+# @!attribute [rw] lastRecord
 #   @return [String, nil]
 #
 # @!attribute [rw] location
 #   @return [String, nil]
 #
-# @!attribute [rw] short_desc
+# @!attribute [rw] shortDesc
 #   @return [String, nil]
 #
 # @!attribute [rw] status
 #   @return [String]
 #
-# @!attribute [rw] wiki_link
+# @!attribute [rw] wikiLink
 #   @return [String, nil]
 Animal = Struct.new(
-  :binomial_name,
-  :common_name,
+  :binomialName,
+  :commonName,
   :data,
-  :image_src,
-  :last_record,
+  :imageSrc,
+  :lastRecord,
   :location,
-  :short_desc,
+  :shortDesc,
   :status,
-  :wiki_link,
+  :wikiLink,
   keyword_init: true
 )
 
@@ -60,42 +60,42 @@ AnimalLoadMatch = Struct.new(
 
 # Request payload for Animal#list.
 #
-# @!attribute [rw] binomial_name
+# @!attribute [rw] binomialName
 #   @return [String, nil]
 #
-# @!attribute [rw] common_name
+# @!attribute [rw] commonName
 #   @return [String, nil]
 #
 # @!attribute [rw] data
 #   @return [Array, nil]
 #
-# @!attribute [rw] image_src
+# @!attribute [rw] imageSrc
 #   @return [String, nil]
 #
-# @!attribute [rw] last_record
+# @!attribute [rw] lastRecord
 #   @return [String, nil]
 #
 # @!attribute [rw] location
 #   @return [String, nil]
 #
-# @!attribute [rw] short_desc
+# @!attribute [rw] shortDesc
 #   @return [String, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] wiki_link
+# @!attribute [rw] wikiLink
 #   @return [String, nil]
 AnimalListMatch = Struct.new(
-  :binomial_name,
-  :common_name,
+  :binomialName,
+  :commonName,
   :data,
-  :image_src,
-  :last_record,
+  :imageSrc,
+  :lastRecord,
   :location,
-  :short_desc,
+  :shortDesc,
   :status,
-  :wiki_link,
+  :wikiLink,
   keyword_init: true
 )
 

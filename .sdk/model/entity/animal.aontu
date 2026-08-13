@@ -6,12 +6,12 @@ main: kit: entity: animal: {
 
   fields: [
     {
-      name: "binomial_name"
+      name: "binomialName"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "common_name"
+      name: "commonName"
       req: false
       type: "`$STRING`"
     }
@@ -21,12 +21,12 @@ main: kit: entity: animal: {
       type: "`$ARRAY`"
     }
     {
-      name: "image_src"
+      name: "imageSrc"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "last_record"
+      name: "lastRecord"
       req: false
       type: "`$STRING`"
     }
@@ -36,7 +36,7 @@ main: kit: entity: animal: {
       type: "`$STRING`"
     }
     {
-      name: "short_desc"
+      name: "shortDesc"
       req: false
       type: "`$STRING`"
     }
@@ -46,7 +46,7 @@ main: kit: entity: animal: {
       type: "`$STRING`"
     }
     {
-      name: "wiki_link"
+      name: "wikiLink"
       req: false
       type: "`$STRING`"
     }
@@ -82,7 +82,7 @@ main: kit: entity: animal: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]

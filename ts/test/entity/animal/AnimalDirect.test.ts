@@ -19,11 +19,15 @@ import {
 describe('AnimalDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXTINCTANIMALS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXTINCTANIMALS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXTINCT_ANIMALS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXTINCT_ANIMALS_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new ExtinctAnimalsSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -134,17 +138,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'EXTINCTANIMALS_TEST_ANIMAL_ENTID': {},
-    'EXTINCTANIMALS_TEST_LIVE': 'FALSE',
+    'EXTINCT_ANIMALS_TEST_ANIMAL_ENTID': {},
+    'EXTINCT_ANIMALS_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.EXTINCTANIMALS_TEST_LIVE
+  const live = 'TRUE' === env.EXTINCT_ANIMALS_TEST_LIVE
 
   if (live) {
     const client = new ExtinctAnimalsSDK({
     })
 
-    let idmap: any = env['EXTINCTANIMALS_TEST_ANIMAL_ENTID']
+    let idmap: any = env['EXTINCT_ANIMALS_TEST_ANIMAL_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

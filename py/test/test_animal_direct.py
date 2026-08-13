@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from extinctanimals_sdk.utility.voxgig_struct import voxgig_struct as vs
 from extinctanimals_sdk import ExtinctAnimalsSDK
-from core import helpers
+from extinctanimals_sdk.core import helpers
 from test import runner
 
 
@@ -105,11 +105,11 @@ def _animal_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "EXTINCTANIMALS_TEST_ANIMAL_ENTID": {},
-        "EXTINCTANIMALS_TEST_LIVE": "FALSE",
+        "EXTINCT_ANIMALS_TEST_ANIMAL_ENTID": {},
+        "EXTINCT_ANIMALS_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("EXTINCTANIMALS_TEST_LIVE") == "TRUE"
+    live = env.get("EXTINCT_ANIMALS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

@@ -26,8 +26,8 @@ import {
 describe('AnimalEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when EXTINCTANIMALS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('EXTINCTANIMALS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when EXTINCT_ANIMALS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('EXTINCT_ANIMALS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = ExtinctAnimalsSDK.test()
@@ -63,7 +63,7 @@ describe('AnimalEntity', async () => {
     const animal_ref01_ent = client.Animal()
     const animal_ref01_match: any = {}
 
-    const animal_ref01_list = await animal_ref01_ent.list(animal_ref01_match)
+    const animal_ref01_list = (await animal_ref01_ent.list(animal_ref01_match)).map((e: any) => e.data())
 
 
 

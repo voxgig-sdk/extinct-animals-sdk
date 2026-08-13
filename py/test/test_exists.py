@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# ExtinctAnimals SDK exists test
 
 import pytest
 from extinctanimals_sdk import ExtinctAnimalsSDK

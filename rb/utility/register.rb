@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ ExtinctAnimalsUtility.registrar = ->(u) {
   u.prepare_params = ExtinctAnimalsUtilities::PrepareParams
   u.prepare_path = ExtinctAnimalsUtilities::PreparePath
   u.prepare_query = ExtinctAnimalsUtilities::PrepareQuery
+  u.graphql_body = ExtinctAnimalsUtilities::GraphqlBody
+  u.graphql_errors = ExtinctAnimalsUtilities::GraphqlErrors
   u.result_basic = ExtinctAnimalsUtilities::ResultBasic
   u.result_body = ExtinctAnimalsUtilities::ResultBody
   u.result_headers = ExtinctAnimalsUtilities::ResultHeaders

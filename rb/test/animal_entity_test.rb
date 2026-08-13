@@ -62,7 +62,7 @@ class AnimalEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set EXTINCTANIMALS_TEST_ANIMAL_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set EXTINCT_ANIMALS_TEST_ANIMAL_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -116,22 +116,22 @@ def animal_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["EXTINCTANIMALS_TEST_ANIMAL_ENTID"]
+  entid_env_raw = ENV["EXTINCT_ANIMALS_TEST_ANIMAL_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "EXTINCTANIMALS_TEST_ANIMAL_ENTID" => idmap,
-    "EXTINCTANIMALS_TEST_LIVE" => "FALSE",
-    "EXTINCTANIMALS_TEST_EXPLAIN" => "FALSE",
+    "EXTINCT_ANIMALS_TEST_ANIMAL_ENTID" => idmap,
+    "EXTINCT_ANIMALS_TEST_LIVE" => "FALSE",
+    "EXTINCT_ANIMALS_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["EXTINCTANIMALS_TEST_ANIMAL_ENTID"])
+    env["EXTINCT_ANIMALS_TEST_ANIMAL_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE"
+  if env["EXTINCT_ANIMALS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -140,13 +140,13 @@ def animal_basic_setup(extra)
     client = ExtinctAnimalsSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE"
+  live = env["EXTINCT_ANIMALS_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["EXTINCTANIMALS_TEST_EXPLAIN"] == "TRUE",
+    explain: env["EXTINCT_ANIMALS_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

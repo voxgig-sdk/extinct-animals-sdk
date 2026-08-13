@@ -116,15 +116,15 @@ const animal = client.Animal()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | `string` | Yes |  |
-| `common_name` | `string` | No |  |
+| `binomialName` | `string` | Yes |  |
+| `commonName` | `string` | No |  |
 | `data` | `any[]` | Yes |  |
-| `image_src` | `string` | No |  |
-| `last_record` | `string` | No |  |
+| `imageSrc` | `string` | No |  |
+| `lastRecord` | `string` | No |  |
 | `location` | `string` | No |  |
-| `short_desc` | `string` | No |  |
+| `shortDesc` | `string` | No |  |
 | `status` | `string` | Yes |  |
-| `wiki_link` | `string` | No |  |
+| `wikiLink` | `string` | No |  |
 
 ### Operations
 

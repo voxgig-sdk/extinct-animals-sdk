@@ -87,15 +87,15 @@ animal = client.Animal()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `binomial_name` | `str` | Yes |  |
-| `common_name` | `str` | No |  |
+| `binomialName` | `str` | Yes |  |
+| `commonName` | `str` | No |  |
 | `data` | `list` | Yes |  |
-| `image_src` | `str` | No |  |
-| `last_record` | `str` | No |  |
+| `imageSrc` | `str` | No |  |
+| `lastRecord` | `str` | No |  |
 | `location` | `str` | No |  |
-| `short_desc` | `str` | No |  |
+| `shortDesc` | `str` | No |  |
 | `status` | `str` | Yes |  |
-| `wiki_link` | `str` | No |  |
+| `wikiLink` | `str` | No |  |
 
 ### Operations
 

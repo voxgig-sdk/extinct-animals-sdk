@@ -38,7 +38,7 @@ try {
     // list() returns an array of Animal records — iterate directly.
     $animals = $client->Animal()->list();
     foreach ($animals as $item) {
-        echo $item["binomial_name"] . "\n";
+        echo $item["binomialName"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Animal record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Animal record (throws on error).
     $animal = $client->Animal()->load(["id" => 1]);
     print_r($animal);
 } catch (\Throwable $err) {
@@ -140,7 +140,8 @@ $client = ExtinctAnimalsSDK::test([
     "entity" => ["animal" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $animal = $client->Animal()->list();
 print_r($animal);
 ```
@@ -240,7 +241,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -262,15 +263,15 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `binomial_name` |  |
-| `common_name` |  |
+| `binomialName` |  |
+| `commonName` |  |
 | `data` |  |
-| `image_src` |  |
-| `last_record` |  |
+| `imageSrc` |  |
+| `lastRecord` |  |
 | `location` |  |
-| `short_desc` |  |
+| `shortDesc` |  |
 | `status` |  |
-| `wiki_link` |  |
+| `wikiLink` |  |
 
 Operations: List, Load.
 
@@ -296,20 +297,20 @@ Create an instance: `$animal = $client->Animal();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `binomial_name` | `string` |  |
-| `common_name` | `string` |  |
+| `binomialName` | `string` |  |
+| `commonName` | `string` |  |
 | `data` | `array` |  |
-| `image_src` | `string` |  |
-| `last_record` | `string` |  |
+| `imageSrc` | `string` |  |
+| `lastRecord` | `string` |  |
 | `location` | `string` |  |
-| `short_desc` | `string` |  |
+| `shortDesc` | `string` |  |
 | `status` | `string` |  |
-| `wiki_link` | `string` |  |
+| `wikiLink` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Animal record (throws on error).
+// load() returns the ENTITY — call data_get() for the Animal record (throws on error).
 $animal = $client->Animal()->load(["id" => 1]);
 ```
 

@@ -26,14 +26,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "binomial_name",
+						"name": "binomialName",
 						"req": true,
 						"type": "`$STRING`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "common_name",
+						"name": "commonName",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -47,14 +47,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "image_src",
+						"name": "imageSrc",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "last_record",
+						"name": "lastRecord",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
@@ -68,7 +68,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "short_desc",
+						"name": "shortDesc",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 6,
@@ -82,7 +82,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "wiki_link",
+						"name": "wikiLink",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 8,
@@ -109,6 +109,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/animal/",
 								"parts": []any{
@@ -121,12 +122,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.data`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -147,6 +147,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/animal/{number}",
 								"parts": []any{
@@ -170,7 +171,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

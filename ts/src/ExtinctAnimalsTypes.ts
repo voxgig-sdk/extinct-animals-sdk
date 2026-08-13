@@ -6,15 +6,15 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Animal {
-  binomial_name: string
-  common_name?: string
+  binomialName: string
+  commonName?: string
   data: any[]
-  image_src?: string
-  last_record?: string
+  imageSrc?: string
+  lastRecord?: string
   location?: string
-  short_desc?: string
+  shortDesc?: string
   status: string
-  wiki_link?: string
+  wikiLink?: string
 }
 
 export interface AnimalLoadMatch {
@@ -22,14 +22,14 @@ export interface AnimalLoadMatch {
 }
 
 export interface AnimalListMatch {
-  binomial_name?: string
-  common_name?: string
+  binomialName?: string
+  commonName?: string
   data?: any[]
-  image_src?: string
-  last_record?: string
+  imageSrc?: string
+  lastRecord?: string
   location?: string
-  short_desc?: string
+  shortDesc?: string
   status?: string
-  wiki_link?: string
+  wikiLink?: string
 }
 

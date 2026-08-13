@@ -6,19 +6,23 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/extinct-animals-sdk/go/core"
+)
 
 // Animal is the typed data model for the animal entity.
 type Animal struct {
-	BinomialName string `json:"binomial_name"`
-	CommonName *string `json:"common_name,omitempty"`
+	BinomialName string `json:"binomialName"`
+	CommonName *string `json:"commonName,omitempty"`
 	Data []any `json:"data"`
-	ImageSrc *string `json:"image_src,omitempty"`
-	LastRecord *string `json:"last_record,omitempty"`
+	ImageSrc *string `json:"imageSrc,omitempty"`
+	LastRecord *string `json:"lastRecord,omitempty"`
 	Location *string `json:"location,omitempty"`
-	ShortDesc *string `json:"short_desc,omitempty"`
+	ShortDesc *string `json:"shortDesc,omitempty"`
 	Status string `json:"status"`
-	WikiLink *string `json:"wiki_link,omitempty"`
+	WikiLink *string `json:"wikiLink,omitempty"`
 }
 
 // AnimalLoadMatch is the typed request payload for Animal.LoadTyped.
@@ -28,15 +32,15 @@ type AnimalLoadMatch struct {
 
 // AnimalListMatch is the typed request payload for Animal.ListTyped.
 type AnimalListMatch struct {
-	BinomialName *string `json:"binomial_name,omitempty"`
-	CommonName *string `json:"common_name,omitempty"`
+	BinomialName *string `json:"binomialName,omitempty"`
+	CommonName *string `json:"commonName,omitempty"`
 	Data *[]any `json:"data,omitempty"`
-	ImageSrc *string `json:"image_src,omitempty"`
-	LastRecord *string `json:"last_record,omitempty"`
+	ImageSrc *string `json:"imageSrc,omitempty"`
+	LastRecord *string `json:"lastRecord,omitempty"`
 	Location *string `json:"location,omitempty"`
-	ShortDesc *string `json:"short_desc,omitempty"`
+	ShortDesc *string `json:"shortDesc,omitempty"`
 	Status *string `json:"status,omitempty"`
-	WikiLink *string `json:"wiki_link,omitempty"`
+	WikiLink *string `json:"wikiLink,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the
@@ -51,12 +55,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -68,12 +86,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

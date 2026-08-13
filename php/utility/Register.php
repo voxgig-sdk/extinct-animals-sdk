@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ExtinctAnimalsUtility::setRegistrar(function (ExtinctAnimalsUtility $u): void {
     $u->prepare_params = [ExtinctAnimalsPrepareParams::class, 'call'];
     $u->prepare_path = [ExtinctAnimalsPreparePath::class, 'call'];
     $u->prepare_query = [ExtinctAnimalsPrepareQuery::class, 'call'];
+    $u->graphql_body = [ExtinctAnimalsGraphql::class, 'body'];
+    $u->graphql_errors = [ExtinctAnimalsGraphql::class, 'errors'];
     $u->result_basic = [ExtinctAnimalsResultBasic::class, 'call'];
     $u->result_body = [ExtinctAnimalsResultBody::class, 'call'];
     $u->result_headers = [ExtinctAnimalsResultHeaders::class, 'call'];

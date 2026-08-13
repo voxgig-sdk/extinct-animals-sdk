@@ -35,7 +35,9 @@ const client = new ExtinctAnimalsSDK()
 
 ### 2. List animal records
 
-`list()` resolves to an array of Animal objects — iterate it directly:
+`list()` resolves to an array of Animal ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const animals = await client.Animal().list()
@@ -133,7 +135,8 @@ Create a mock client for unit testing — no server required:
 const client = ExtinctAnimalsSDK.test()
 
 const animal = await client.Animal().list()
-// animal is a bare entity populated with mock response data
+// animal is the entity, populated with mock response data
+// — call animal.data() for the record itself
 console.log(animal)
 ```
 
@@ -299,15 +302,15 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `binomial_name` |  |
-| `common_name` |  |
+| `binomialName` |  |
+| `commonName` |  |
 | `data` |  |
-| `image_src` |  |
-| `last_record` |  |
+| `imageSrc` |  |
+| `lastRecord` |  |
 | `location` |  |
-| `short_desc` |  |
+| `shortDesc` |  |
 | `status` |  |
-| `wiki_link` |  |
+| `wikiLink` |  |
 
 Operations: list, load.
 
@@ -333,15 +336,15 @@ Create an instance: `const animal = client.Animal()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `binomial_name` | `string` |  |
-| `common_name` | `string` |  |
+| `binomialName` | `string` |  |
+| `commonName` | `string` |  |
 | `data` | `any[]` |  |
-| `image_src` | `string` |  |
-| `last_record` | `string` |  |
+| `imageSrc` | `string` |  |
+| `lastRecord` | `string` |  |
 | `location` | `string` |  |
-| `short_desc` | `string` |  |
+| `shortDesc` | `string` |  |
 | `status` | `string` |  |
-| `wiki_link` | `string` |  |
+| `wikiLink` | `string` |  |
 
 #### Example: Load
 

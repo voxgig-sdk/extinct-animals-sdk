@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import ExtinctAnimalsControl
-from core.error import ExtinctAnimalsError
-from core.result import ExtinctAnimalsResult
-from core.spec import ExtinctAnimalsSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import ExtinctAnimalsControl
+from projectname_sdk.core.error import ExtinctAnimalsError
+from projectname_sdk.core.result import ExtinctAnimalsResult
+from projectname_sdk.core.spec import ExtinctAnimalsSpec
 
 
 # True when this SDK was generated with the named feature.

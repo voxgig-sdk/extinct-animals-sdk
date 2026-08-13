@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'ExtinctAnimals',
   }
 
 
@@ -56,14 +56,14 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "binomial_name",
+          "name": "binomialName",
           "req": true,
           "type": "`$STRING`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "common_name",
+          "name": "commonName",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
@@ -77,14 +77,14 @@ class Config {
         },
         {
           "active": true,
-          "name": "image_src",
+          "name": "imageSrc",
           "req": false,
           "type": "`$STRING`",
           "index$": 3
         },
         {
           "active": true,
-          "name": "last_record",
+          "name": "lastRecord",
           "req": false,
           "type": "`$STRING`",
           "index$": 4
@@ -98,7 +98,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "short_desc",
+          "name": "shortDesc",
           "req": false,
           "type": "`$STRING`",
           "index$": 6
@@ -112,7 +112,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "wiki_link",
+          "name": "wikiLink",
           "req": false,
           "type": "`$STRING`",
           "index$": 8
@@ -139,6 +139,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/animal/",
               "parts": [
@@ -151,7 +152,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.data`"
               },
               "index$": 0
             }
@@ -177,6 +178,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/animal/{number}",
               "parts": [

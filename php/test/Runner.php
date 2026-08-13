@@ -43,8 +43,8 @@ class ExtinctAnimalsTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('EXTINCTANIMALS_TEST_LIVE');
-        $override = self::getenv('EXTINCTANIMALS_TEST_OVERRIDE');
+        $live = self::getenv('EXTINCT_ANIMALS_TEST_LIVE');
+        $override = self::getenv('EXTINCT_ANIMALS_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class ExtinctAnimalsTestRunner
             }
         }
 
-        $explain = self::getenv('EXTINCTANIMALS_TEST_EXPLAIN');
+        $explain = self::getenv('EXTINCT_ANIMALS_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['EXTINCTANIMALS_TEST_EXPLAIN'] = $explain;
+            $m['EXTINCT_ANIMALS_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

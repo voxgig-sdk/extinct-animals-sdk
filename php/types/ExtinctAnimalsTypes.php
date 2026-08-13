@@ -15,15 +15,15 @@ declare(strict_types=1);
 /** Animal entity data model. */
 class Animal
 {
-    public string $binomial_name;
-    public ?string $common_name = null;
+    public string $binomialName;
+    public ?string $commonName = null;
     public array $data;
-    public ?string $image_src = null;
-    public ?string $last_record = null;
+    public ?string $imageSrc = null;
+    public ?string $lastRecord = null;
     public ?string $location = null;
-    public ?string $short_desc = null;
+    public ?string $shortDesc = null;
     public string $status;
-    public ?string $wiki_link = null;
+    public ?string $wikiLink = null;
 }
 
 /** Request payload for Animal#load. */
@@ -35,14 +35,14 @@ class AnimalLoadMatch
 /** Request payload for Animal#list. */
 class AnimalListMatch
 {
-    public ?string $binomial_name = null;
-    public ?string $common_name = null;
+    public ?string $binomialName = null;
+    public ?string $commonName = null;
     public ?array $data = null;
-    public ?string $image_src = null;
-    public ?string $last_record = null;
+    public ?string $imageSrc = null;
+    public ?string $lastRecord = null;
     public ?string $location = null;
-    public ?string $short_desc = null;
+    public ?string $shortDesc = null;
     public ?string $status = null;
-    public ?string $wiki_link = null;
+    public ?string $wikiLink = null;
 }
 

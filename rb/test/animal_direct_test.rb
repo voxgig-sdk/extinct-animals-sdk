@@ -114,11 +114,11 @@ def animal_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "EXTINCTANIMALS_TEST_ANIMAL_ENTID" => {},
-    "EXTINCTANIMALS_TEST_LIVE" => "FALSE",
+    "EXTINCT_ANIMALS_TEST_ANIMAL_ENTID" => {},
+    "EXTINCT_ANIMALS_TEST_LIVE" => "FALSE",
   })
 
-  live = env["EXTINCTANIMALS_TEST_LIVE"] == "TRUE"
+  live = env["EXTINCT_ANIMALS_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

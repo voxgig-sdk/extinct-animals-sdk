@@ -269,15 +269,15 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"binomial_name"` |  |
-| `"common_name"` |  |
+| `"binomialName"` |  |
+| `"commonName"` |  |
 | `"data"` |  |
-| `"image_src"` |  |
-| `"last_record"` |  |
+| `"imageSrc"` |  |
+| `"lastRecord"` |  |
 | `"location"` |  |
-| `"short_desc"` |  |
+| `"shortDesc"` |  |
 | `"status"` |  |
-| `"wiki_link"` |  |
+| `"wikiLink"` |  |
 
 Operations: List, Load.
 
@@ -303,15 +303,15 @@ Create an instance: `animal := client.Animal(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `binomial_name` | `string` |  |
-| `common_name` | `string` |  |
+| `binomialName` | `string` |  |
+| `commonName` | `string` |  |
 | `data` | `[]any` |  |
-| `image_src` | `string` |  |
-| `last_record` | `string` |  |
+| `imageSrc` | `string` |  |
+| `lastRecord` | `string` |  |
 | `location` | `string` |  |
-| `short_desc` | `string` |  |
+| `shortDesc` | `string` |  |
 | `status` | `string` |  |
-| `wiki_link` | `string` |  |
+| `wikiLink` | `string` |  |
 
 #### Example: Load
 

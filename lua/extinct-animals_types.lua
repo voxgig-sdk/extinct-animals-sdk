@@ -7,29 +7,29 @@
 -- edit by hand.
 
 ---@class Animal
----@field binomial_name string
----@field common_name? string
+---@field binomialName string
+---@field commonName? string
 ---@field data table
----@field image_src? string
----@field last_record? string
+---@field imageSrc? string
+---@field lastRecord? string
 ---@field location? string
----@field short_desc? string
+---@field shortDesc? string
 ---@field status string
----@field wiki_link? string
+---@field wikiLink? string
 
 ---@class AnimalLoadMatch
 ---@field id number
 
 ---@class AnimalListMatch
----@field binomial_name? string
----@field common_name? string
+---@field binomialName? string
+---@field commonName? string
 ---@field data? table
----@field image_src? string
----@field last_record? string
+---@field imageSrc? string
+---@field lastRecord? string
 ---@field location? string
----@field short_desc? string
+---@field shortDesc? string
 ---@field status? string
----@field wiki_link? string
+---@field wikiLink? string
 
 local M = {}
 

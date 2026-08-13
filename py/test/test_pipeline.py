@@ -16,11 +16,11 @@
 import pytest
 
 from extinctanimals_sdk import ExtinctAnimalsSDK
-from core.error import ExtinctAnimalsError
-from core.result import ExtinctAnimalsResult
-from core.response import ExtinctAnimalsResponse
-from core.spec import ExtinctAnimalsSpec
-from feature.base_feature import ExtinctAnimalsBaseFeature
+from extinctanimals_sdk.core.error import ExtinctAnimalsError
+from extinctanimals_sdk.core.result import ExtinctAnimalsResult
+from extinctanimals_sdk.core.response import ExtinctAnimalsResponse
+from extinctanimals_sdk.core.spec import ExtinctAnimalsSpec
+from extinctanimals_sdk.feature.base_feature import ExtinctAnimalsBaseFeature
 
 
 def _client():
